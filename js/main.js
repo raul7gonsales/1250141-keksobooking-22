@@ -9,9 +9,9 @@ const getRandomArbitrary = function (min, max, numbersAfterDot) {
 }
 
 // Присвоение значений диапазону и Вызов функций
-let minNumber = -2;
+let minNumber = 1;
 let maxNumber = 10;
-let partibusLength = 5;
+let fractionalLength = 5;
 
 if ((minNumber >= maxNumber) || (minNumber < 0) || (maxNumber < 0)) {
   alert('Неверное значение диапазона');
@@ -19,6 +19,6 @@ if ((minNumber >= maxNumber) || (minNumber < 0) || (maxNumber < 0)) {
   let randomInt = getRandomInclusive (minNumber, maxNumber);
   alert('Случайное целое число: ' + randomInt);
 
-  let randomArbitary = getRandomArbitrary (minNumber, maxNumber, partibusLength);
-  alert('Случайное число с плавающей точкой: ' + randomArbitary);
+  let randomArbitrary = getRandomArbitrary (minNumber, maxNumber, fractionalLength);
+  alert('Случайное число с плавающей точкой: ' + randomArbitrary);
 }
