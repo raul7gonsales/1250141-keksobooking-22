@@ -50,8 +50,7 @@ const PRICE_MAX = 7;
 const ROOMS_MAX = 8;
 const QUESTS_MAX = 12;
 const HOUSING_TYPES = ['palace', 'flat', 'house', 'bungalow'];
-const CHECKINS = ['12:00', '13:00', '14:00'];
-const CHECKOUTS = ['2:00', '13:00', '14:00'];
+const TIMES = ['12:00', '13:00', '14:00'];
 const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 const DESCRIPTION = 'Modern, stylish & spacious one bedroom apartment in central city. This is lower-ground entirely private apartment, 5 min walk railway station! Apartment offers a comfortable stay with fast unlimited Wifi access for Free plus Nespresso Cafe capsule and machines, flatscreen TV and all kitchenettes. ';
 const PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
@@ -74,8 +73,8 @@ const createHousingObjects = function () {
       type: getRandomElement(HOUSING_TYPES),
       rooms: getRandomInclusive(1, ROOMS_MAX),
       guests: getRandomInclusive(1, QUESTS_MAX),
-      checkin: getRandomElement(CHECKINS),
-      checkout: getRandomElement(CHECKOUTS),
+      checkin: getRandomElement(TIMES),
+      checkout: getRandomElement(TIMES),
       features: getRandomArray(FEATURES),
       description: DESCRIPTION,
       photos: getRandomArray(PHOTOS),
@@ -89,9 +88,7 @@ const createHousingObjects = function () {
 
 // Возвращает массив длиной arrayCount, каждый элемент = createHousingObjects
 const createHousingArray = function (arrayCount) {
-  const arrayHousing = new Array(arrayCount).fill(null).map(() => createHousingObjects());
-  //alert(arrayHousing);
-  return arrayHousing;
+  return new Array(arrayCount).fill(null).map(() => createHousingObjects());
 };
 
 const arrayHousing = createHousingArray(ARRAY_DECLARATION_COUNT);
