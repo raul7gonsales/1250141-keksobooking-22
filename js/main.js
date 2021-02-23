@@ -1,2 +1,6 @@
 import {arrayHousing} from './data.js';
-arrayHousing;
+import {renderingCardElement} from './card.js';
+
+const [generatedFirstItem] = arrayHousing;
+//console.log([generatedFirstItem]);
+renderingCardElement(generatedFirstItem);
