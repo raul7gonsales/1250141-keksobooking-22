@@ -1026,3 +1026,16 @@ fieldset {
 .hidden {
   display: none;
 }
+
+/* Стили для временного отображения карточки в module5-task1 */
+.map__canvas {
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.popup {
+  margin: 25px;
+  padding: 25px;
+  border: 2px solid #000;
+}

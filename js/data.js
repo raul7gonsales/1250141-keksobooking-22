@@ -56,7 +56,7 @@ const createHousingArray = function (arrayCount) {
 };
 
 const arrayHousing = createHousingArray(ARRAY_DECLARATION_COUNT);
-alert(arrayHousing);
+//alert(arrayHousing);
 //console.log(arrayHousing);
 
-export {arrayHousing};
+export { arrayHousing };

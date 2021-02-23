@@ -36,4 +36,20 @@ const getRandomArray = function (array) {
   return randomArray;
 };
 
-export {getRandomInclusive, getRandomArbitrary, getRandomElement, getRandomArray};
+// Возвращает тип жилья
+const getHousingType = function (types) {
+  switch (types) {
+    case 'flat':
+      return 'Квартира';
+    case 'bungalow':
+      return 'Бунгало';
+    case 'house':
+      return 'Дом';
+    case 'palace':
+      return 'Дворец';
+    default:
+      return 'Любой тип жилья';
+  }
+};
+
+export {getRandomInclusive, getRandomArbitrary, getRandomElement, getRandomArray, getHousingType };
