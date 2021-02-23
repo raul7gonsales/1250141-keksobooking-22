@@ -37,7 +37,7 @@ const getRandomArray = function (array) {
 };
 
 // Возвращает тип жилья
-const getHousingType = function (types) {
+const getHousingType = (types) => {
   switch (types) {
     case 'flat':
       return 'Квартира';

@@ -8,6 +8,8 @@ const generatedFragment = document.createDocumentFragment();
 const renderingCardElement = ({ author, offer }) => {
   const housingElement = cardTemplate.cloneNode(true);
   const offerType = getHousingType(offer.type);
+  const housingImageX = 45;
+  const housingImageY = 40;
   housingElement.querySelector('.popup__type').textContent = offerType;
 
   // Добавляем данные в попап
@@ -46,7 +48,7 @@ const renderingCardElement = ({ author, offer }) => {
   } else {
     housingElement.querySelector('.popup__description').classList.add('hidden');
   }
-  if ((offer.features).length > 0) {
+  if (offer.features.length > 0) {
     // создаем элементы списка с каждой feature
     housingElement.querySelector('.popup__features').textContent = ' ';
     const featuresList = housingElement.querySelector('.popup__features');
@@ -60,12 +62,12 @@ const renderingCardElement = ({ author, offer }) => {
   } else {
     housingElement.querySelector('.popup__features').classList.add('hidden');
   }
-  if ((offer.photos).length > 0) {
+  if (offer.photos.length > 0) {
     // создаем фото
     housingElement.querySelector('.popup__photos').textContent = ' ';
     const photoList = housingElement.querySelector('.popup__photos');
     offer.photos.forEach((photo) => {
-      const photoImg = new Image(45, 40);
+      const photoImg = new Image(housingImageX, housingImageY);
       photoImg.classList.add('popup__photo');
       photoImg.src = photo;
       photoList.append(photoImg);
