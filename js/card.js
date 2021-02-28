@@ -1,8 +1,8 @@
 import { getHousingType } from './util.js';
 
-const mapCanvas = document.querySelector('.map__canvas');
+// const mapCanvas = document.querySelector('.cardDeclarations');
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
-const generatedFragment = document.createDocumentFragment();
+// const generatedFragment = document.createDocumentFragment();
 
 
 const renderingCardElement = ({ author, offer }) => {
@@ -14,7 +14,7 @@ const renderingCardElement = ({ author, offer }) => {
 
   // Добавляем данные в попап
   if (author.avatar) {
-    housingElement.querySelector('.popup__avatar').textContent = author.avatar;
+    housingElement.querySelector('.popup__avatar').src = author.avatar;
   } else {
     housingElement.querySelector('.popup__avatar').classList.add('hidden');
   }
@@ -78,8 +78,9 @@ const renderingCardElement = ({ author, offer }) => {
   }
 
   // присвоение дочерних эл-тов в DOM
-  generatedFragment.appendChild(housingElement);
-  return mapCanvas.appendChild(generatedFragment);
+  // generatedFragment.appendChild(housingElement);
+  // return mapCanvas.appendChild(generatedFragment);
+  return housingElement;
 };
 
 export { renderingCardElement };

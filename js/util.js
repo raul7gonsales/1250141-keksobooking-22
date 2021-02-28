@@ -52,4 +52,24 @@ const getHousingType = (types) => {
   }
 };
 
-export {getRandomInclusive, getRandomArbitrary, getRandomElement, getRandomArray, getHousingType };
+const minPriceFlat = 1000;
+const minPriceBungalow = 0;
+const minPriceHouse = 5000;
+const minPricePalace = 10000;
+
+const getPriceMinValue = (typeSelectValue) => {
+  switch (typeSelectValue) {
+    case 'flat':
+      return minPriceFlat;
+    case 'bungalow':
+      return minPriceBungalow;
+    case 'house':
+      return minPriceHouse;
+    case 'palace':
+      return minPricePalace;
+    default:
+      return 0;
+  }
+};
+
+export { getRandomInclusive, getRandomArbitrary, getRandomElement, getRandomArray, getHousingType, getPriceMinValue };
