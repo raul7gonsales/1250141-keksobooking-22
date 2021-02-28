@@ -2,17 +2,21 @@ import { arrayHousing } from './data.js';
 import { renderingCardElement } from './card.js';
 import { pageInactiveState, pageActiveState } from './checkDocumentLoader.js';
 
-
+pageInactiveState();
+const mapCenterLat = 35.6895001;
+const mapCenterLng = 139.6917100;
+const address = document.querySelector('#address');
+address.value = `${mapCenterLat}, ${mapCenterLng}`;
+address.setAttribute('readonly', 'true');
 let L = window.L;
 const createMap = () => {
-  pageInactiveState();
   const map = L.map('map-canvas')
     .on('load', () => {
-      pageActiveState()
+      pageActiveState();
     })
     .setView({
-      lat: 35.6895000,
-      lng: 139.6917100,
+      lat: mapCenterLat,
+      lng: mapCenterLng,
     }, 12);
 
   L.tileLayer(
@@ -36,8 +40,8 @@ const createMap = () => {
 
   const mainMarker = L.marker(
     {
-      lat: 35.6895000,
-      lng: 139.6917100,
+      lat: mapCenterLat,
+      lng: mapCenterLng,
     },
     {
       draggable: true,
@@ -49,9 +53,9 @@ const createMap = () => {
   mainMarker.on('moveend', (evt) => {
     const getLatLng = evt.target.getLatLng();
     const getLat = getLatLng.lat.toFixed(7);
-    const getlng = getLatLng.lng.toFixed(7);
+    const getLng = getLatLng.lng.toFixed(7);
     const address = document.querySelector('#address');
-    address.value = `${getLat}, ${getlng}`;
+    address.value = `${getLat}, ${getLng}`;
     address.setAttribute('readonly', 'true');
   });
 

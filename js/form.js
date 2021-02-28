@@ -1,25 +1,6 @@
-import { getRandomInclusive } from './util.js';
+import { getRandomInclusive, getPriceMinValue } from './util.js';
 
 const typeSelect = document.querySelector('#type');
-const minPriceFlat = 1000;
-const minPriceBungalow = 0;
-const minPriceHouse = 5000;
-const minPricePalace = 10000;
-
-const getPriceMinValue = (typeSelectValue) => {
-  switch (typeSelectValue) {
-    case 'flat':
-      return minPriceFlat;
-    case 'bungalow':
-      return minPriceBungalow;
-    case 'house':
-      return minPriceHouse;
-    case 'palace':
-      return minPricePalace;
-    default:
-      return 0;
-  }
-};
 
 const getPriceMin = () => {
   typeSelect.addEventListener('change', () => {
