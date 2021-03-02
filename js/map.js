@@ -1,13 +1,13 @@
 import { arrayHousing } from './data.js';
 import { renderingCardElement } from './card.js';
-import { pageInactiveState, pageActiveState } from './checkDocumentLoader.js';
+import { pageInactiveState, pageActiveState } from './form.js';
 
 pageInactiveState();
 const mapCenterLat = 35.6895001;
 const mapCenterLng = 139.6917100;
-const address = document.querySelector('#address');
-address.value = `${mapCenterLat}, ${mapCenterLng}`;
-address.setAttribute('readonly', 'true');
+// const address = document.querySelector('#address');
+// address.value = `${mapCenterLat}, ${mapCenterLng}`;
+// address.setAttribute('readonly', 'true');
 let L = window.L;
 const createMap = () => {
   const map = L.map('map-canvas')
