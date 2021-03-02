@@ -1,5 +1,13 @@
 import { getPriceMinValue } from './util.js';
 
+const MIN_TITLE_LENGTH = 30;
+const MAX_TITLE_LENGTH = 100;
+
+let numberRoomsTenants = {
+  rooms: [1, 2, 3, 100],
+  tenants: [3, 2, 1, 0],
+};
+
 // Добавление disabled элементам
 const addElementDisabled = (formElements) => {
   formElements.forEach(element => {
@@ -69,7 +77,7 @@ const capacityRemoveDisabled = (start, end) => {
   }
 }
 
-if (numberRooms.value == 1) {
+if (numberRooms.value == numberRoomsTenants.rooms[0]) {
   capacityDisabled();
   capacity[2].selected = true;
   capacity[2].removeAttribute('disabled');
@@ -82,30 +90,26 @@ numberRooms.addEventListener('change', () => {
       capacity[i].selected = true;
     }
   }
-  if (numberRooms.value == 1) {
+  if (numberRooms.value == numberRoomsTenants.rooms[0]) {
     capacityDisabled();
-    capacityRemoveDisabled(2, 2);
+    capacityRemoveDisabled(numberRoomsTenants.tenants[1], numberRoomsTenants.tenants[1]);
   }
-  if (numberRooms.value == 2) {
+  if (numberRooms.value == numberRoomsTenants.rooms[1]) {
     capacityDisabled();
-    capacityRemoveDisabled(1, 2);
+    capacityRemoveDisabled(numberRoomsTenants.tenants[2], numberRoomsTenants.tenants[1]);
   }
-  if (numberRooms.value == 3) {
+  if (numberRooms.value == numberRoomsTenants.rooms[2]) {
     capacityDisabled();
-    capacityRemoveDisabled(0, 2);
+    capacityRemoveDisabled(numberRoomsTenants.tenants[3], numberRoomsTenants.tenants[1]);
   }
-  if (numberRooms.value == 100) {
+  if (numberRooms.value == numberRoomsTenants.rooms[3]) {
     capacityDisabled();
     capacity[3].selected = true;
-    capacityRemoveDisabled(3, 3);
+    capacityRemoveDisabled(numberRoomsTenants.tenants[0], numberRoomsTenants.tenants[0]);
   }
 });
 
-
 // Валидация #title
-const MIN_TITLE_LENGTH = 30;
-const MAX_TITLE_LENGTH = 100;
-
 const titleInput = document.querySelector('#title');
 
 titleInput.addEventListener('input', () => {
