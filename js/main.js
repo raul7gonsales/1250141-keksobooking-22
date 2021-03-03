@@ -1,10 +1,12 @@
-// import {arrayHousing} from './data.js';
-// import {renderingCardElement} from './card.js';
-
-// const [generatedFirstItem] = arrayHousing;
-// renderingCardElement(generatedFirstItem);
-
 import { createMap } from './map.js';
 import './form.js';
+import { setUserFormSubmit, onFormSuccess } from './form.js';
+import { getData } from './serverapi.js';
 
-createMap();
+const DECLARATION_COUNT = 10;
+
+getData((declarations) => {
+  createMap(declarations.slice(0, DECLARATION_COUNT));
+});
+
+setUserFormSubmit(onFormSuccess);

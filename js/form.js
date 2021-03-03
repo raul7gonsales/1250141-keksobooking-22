@@ -1,4 +1,6 @@
 import { getPriceMinValue } from './util.js';
+import { successModal, errorModal } from './modal.js';
+import { sendData } from './serverapi.js';
 
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
@@ -49,7 +51,8 @@ const typeSelect = document.querySelector('#type');
 
 typeSelect.addEventListener('change', () => {
   const priceMin = getPriceMinValue(typeSelect.value);
-  document.getElementById('price').placeholder = priceMin;
+  document.querySelector('#price').placeholder = priceMin;
+  document.querySelector('#price').min = priceMin;
 });
 // Время заезда и выезда
 let timeIn = document.querySelector('#timein');
@@ -132,5 +135,49 @@ priceInput.addEventListener('input', () => {
   priceInput.reportValidity();
 });
 
+// Отправка формы
+const typeDefault = document.querySelector('#type').value;
+const priceDefault = document.querySelector('#price').placeholder;
+const timeInDefault = document.querySelector('#timein').value;
+const timeOutDefault = document.querySelector('#timeout').value;
+const roomDefault = document.querySelector('#room_number').value;
+const capacityDefault = document.querySelector('#capacity').value;
+const featureCheckbox = document.querySelectorAll('.feature__checkbox');
+const descriptionDefault = document.querySelector('#description').value;
 
-export { pageInactiveState, pageActiveState };
+const onFormSuccess = () => {
+  document.querySelector('#title').value = '';
+  document.querySelector('#address').value = '35.6895000, 139.6917100';
+  document.querySelector('#type').value = typeDefault;
+  document.querySelector('#price').placeholder = priceDefault;
+  document.querySelector('#price').min = priceDefault;
+  document.querySelector('#price').value = '';
+  document.querySelector('#timein').value = timeInDefault;
+  document.querySelector('#timeout').value = timeOutDefault;
+  document.querySelector('#room_number').value = roomDefault;
+  document.querySelector('#capacity').value = capacityDefault;
+  featureCheckbox.forEach(element => {
+    element.checked = false;
+  });
+  document.querySelector('#description').value = descriptionDefault;
+  successModal();
+};
+
+const onError = () => {
+  errorModal();
+};
+
+
+const setUserFormSubmit = (onSuccess) => {
+  adForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    sendData(
+      onSuccess,
+      onError,
+      new FormData(evt.target),
+    );
+  });
+};
+
+export { pageInactiveState, pageActiveState, setUserFormSubmit, onFormSuccess };
