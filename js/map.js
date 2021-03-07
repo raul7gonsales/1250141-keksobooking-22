@@ -1,11 +1,11 @@
-import { getHousingType } from './util.js';
+import { getHousingType, mapCenterLat, mapCenterLng } from './util.js';
 import { pageInactiveState, pageActiveState } from './form.js';
 
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
+const photoImgWidth = 45;
+const photoImgHeight = 40;
 
 pageInactiveState();
-const mapCenterLat = 35.6895001;
-const mapCenterLng = 139.6917100;
 let L = window.L;
 const createMap = (arrayHousing) => {
   const map = L.map('map-canvas')
@@ -103,8 +103,7 @@ const createMap = (arrayHousing) => {
       } else {
         housingElement.querySelector('.popup__description').classList.add('hidden');
       }
-      if ((offer.features).length > 0) {
-        // создать li.popup__feature c class popup__feature--  в popup__features
+      if (offer.features.length > 0) {
         housingElement.querySelector('.popup__features').textContent = ' ';
         const featuresList = housingElement.querySelector('.popup__features');
         offer.features.forEach((element) => {
@@ -117,12 +116,11 @@ const createMap = (arrayHousing) => {
       } else {
         housingElement.querySelector('.popup__features').classList.add('hidden');
       }
-      if ((offer.photos).length > 0) {
-        // создать img.popup__photo в popup__photos
+      if (offer.photos.length > 0) {
         housingElement.querySelector('.popup__photos').textContent = ' ';
         const photoList = housingElement.querySelector('.popup__photos');
         offer.photos.forEach((photo) => {
-          const photoImg = new Image(45, 40);
+          const photoImg = new Image(photoImgWidth, photoImgHeight);
           photoImg.classList.add('popup__photo');
           photoImg.src = photo;
           photoList.append(photoImg);

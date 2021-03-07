@@ -1,7 +1,9 @@
 import { showAlert } from './util.js';
+const getDataAddress = 'https://22.javascript.pages.academy/keksobooking/data';
+const sendDataAddress = 'https://22.javascript.pages.academy/keksobooking';
 
 const getData = (onSuccess) => {
-  fetch('https://22.javascript.pages.academy/keksobooking/data')
+  fetch(getDataAddress)
     .then((response) => response.json())
     .then((declarations) => {
       onSuccess(declarations);
@@ -13,7 +15,7 @@ const getData = (onSuccess) => {
 
 const sendData = (onSuccess, onError, body) => {
   fetch(
-    'https://22.javascript.pages.academy/keksobooking',
+    sendDataAddress,
     {
       method: 'POST',
       body,

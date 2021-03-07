@@ -1,4 +1,4 @@
-import { getPriceMinValue } from './util.js';
+import { getPriceMinValue, mapCenterLat, mapCenterLng } from './util.js';
 import { successModal, errorModal } from './modal.js';
 import { sendData } from './serverapi.js';
 
@@ -147,7 +147,7 @@ const descriptionDefault = document.querySelector('#description').value;
 
 const onFormSuccess = () => {
   document.querySelector('#title').value = '';
-  document.querySelector('#address').value = '35.6895000, 139.6917100';
+  document.querySelector('#address').value = String(mapCenterLat) + ', ' + String(mapCenterLng);
   document.querySelector('#type').value = typeDefault;
   document.querySelector('#price').placeholder = priceDefault;
   document.querySelector('#price').min = priceDefault;
@@ -166,7 +166,6 @@ const onFormSuccess = () => {
 const onError = () => {
   errorModal();
 };
-
 
 const setUserFormSubmit = (onSuccess) => {
   adForm.addEventListener('submit', (evt) => {

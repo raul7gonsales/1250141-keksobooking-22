@@ -1,4 +1,6 @@
 const ALERT_SHOW_TIME = 5000;
+const mapCenterLat = 35.6895001;
+const mapCenterLng = 139.6917100;
 
 // Возвращает случайное целое число из диапазона (включительно)
 const getRandomInclusive = function (min, max) {
@@ -99,4 +101,4 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 }
 
-export { getRandomInclusive, getRandomArbitrary, getRandomElement, getRandomArray, getHousingType, getPriceMinValue, isEscEvent, showAlert};
+export { getRandomInclusive, getRandomArbitrary, getRandomElement, getRandomArray, getHousingType, getPriceMinValue, isEscEvent, showAlert, mapCenterLat, mapCenterLng};
