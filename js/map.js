@@ -2,6 +2,11 @@ import { getHousingType, mapCenterLat, mapCenterLng } from './util.js';
 import { pageInactiveState, pageActiveState } from './form.js';
 
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
+const DECLARATION_COUNT = 10;
+const Default = {
+  HOUSING_TYPE_VALUE: 'any',
+};
+const housingType = document.querySelector('#housing-type');
 const photoImgWidth = 45;
 const photoImgHeight = 40;
 
@@ -57,97 +62,117 @@ const createMap = (arrayHousing) => {
     address.setAttribute('readonly', 'true');
   });
 
-  arrayHousing.forEach(({ author, offer, location }) => {
-    const arrayHousingLat = location.lat;
-    const arrayHousingLng = location.lng;
+  arrayHousing
+    .slice()
+    .slice(0, DECLARATION_COUNT)
+    .forEach(({ author, offer, location }) => {
+      const declarationsLat = location.lat;
+      const declarationsLng = location.lng;
 
-    const renderingCardElement = () => {
-      const housingElement = cardTemplate.cloneNode(true);
+      const renderingCardElement = () => {
+        const housingElement = cardTemplate.cloneNode(true);
 
-      const housingType = getHousingType(offer.type);
-      housingElement.querySelector('.popup__type').textContent = housingType;
+        const offerType = getHousingType(offer.type);
+        housingElement.querySelector('.popup__type').textContent = offerType;
 
-      // наполняем данными
-      if (author.avatar) {
-        housingElement.querySelector('.popup__avatar').src = author.avatar;
-      } else {
-        housingElement.querySelector('.popup__avatar').classList.add('hidden');
-      }
-      if (offer.title) {
-        housingElement.querySelector('.popup__title').textContent = offer.title;
-      } else {
-        housingElement.querySelector('.popup__title').classList.add('hidden');
-      }
-      if (offer.address) {
-        housingElement.querySelector('.popup__text--address').textContent = offer.address;
-      } else {
-        housingElement.querySelector('.popup__text--address').classList.add('hidden');
-      }
-      if (offer.price) {
-        housingElement.querySelector('.popup__text--price').textContent = `${offer.price} ₽/ночь`;
-      } else {
-        housingElement.querySelector('.popup__text--price').classList.add('hidden');
-      }
-      if (offer.rooms || offer.guests) {
-        housingElement.querySelector('.popup__text--capacity').textContent = `${offer.rooms} комнаты для ${offer.guests} гостей`;
-      } else {
-        housingElement.querySelector('.popup__text--capacity').classList.add('hidden');
-      }
-      if (offer.checkin || offer.checkout) {
-        housingElement.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
-      } else {
-        housingElement.querySelector('.popup__text--time').classList.add('hidden');
-      }
-      if (offer.description) {
-        housingElement.querySelector('.popup__description').textContent = offer.description;
-      } else {
-        housingElement.querySelector('.popup__description').classList.add('hidden');
-      }
-      if (offer.features.length > 0) {
-        housingElement.querySelector('.popup__features').textContent = ' ';
-        const featuresList = housingElement.querySelector('.popup__features');
-        offer.features.forEach((element) => {
-          const featuresItem = document.createElement('li');
-          featuresItem.classList.add('popup__feature');
-          const featuresClass = `popup__feature--${element}`;
-          featuresItem.classList.add(featuresClass);
-          featuresList.append(featuresItem);
-        });
-      } else {
-        housingElement.querySelector('.popup__features').classList.add('hidden');
-      }
-      if (offer.photos.length > 0) {
-        housingElement.querySelector('.popup__photos').textContent = ' ';
-        const photoList = housingElement.querySelector('.popup__photos');
-        offer.photos.forEach((photo) => {
-          const photoImg = new Image(photoImgWidth, photoImgHeight);
-          photoImg.classList.add('popup__photo');
-          photoImg.src = photo;
-          photoList.append(photoImg);
-        });
+        // наполняем данными
+        if (author.avatar) {
+          housingElement.querySelector('.popup__avatar').src = author.avatar;
+        } else {
+          housingElement.querySelector('.popup__avatar').classList.add('hidden');
+        }
+        if (offer.title) {
+          housingElement.querySelector('.popup__title').textContent = offer.title;
+        } else {
+          housingElement.querySelector('.popup__title').classList.add('hidden');
+        }
+        if (offer.address) {
+          housingElement.querySelector('.popup__text--address').textContent = offer.address;
+        } else {
+          housingElement.querySelector('.popup__text--address').classList.add('hidden');
+        }
+        if (offer.price) {
+          housingElement.querySelector('.popup__text--price').textContent = `${offer.price} ₽/ночь`;
+        } else {
+          housingElement.querySelector('.popup__text--price').classList.add('hidden');
+        }
+        if (offer.rooms || offer.guests) {
+          housingElement.querySelector('.popup__text--capacity').textContent = `${offer.rooms} комнаты для ${offer.guests} гостей`;
+        } else {
+          housingElement.querySelector('.popup__text--capacity').classList.add('hidden');
+        }
+        if (offer.checkin || offer.checkout) {
+          housingElement.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
+        } else {
+          housingElement.querySelector('.popup__text--time').classList.add('hidden');
+        }
+        if (offer.description) {
+          housingElement.querySelector('.popup__description').textContent = offer.description;
+        } else {
+          housingElement.querySelector('.popup__description').classList.add('hidden');
+        }
+        if ((offer.features).length > 0) {
+          housingElement.querySelector('.popup__features').textContent = ' ';
+          const featuresList = housingElement.querySelector('.popup__features');
+          offer.features.forEach((element) => {
+            const featuresItem = document.createElement('li');
+            featuresItem.classList.add('popup__feature');
+            const featuresClass = `popup__feature--${element}`;
+            featuresItem.classList.add(featuresClass);
+            featuresList.append(featuresItem);
+          });
+        } else {
+          housingElement.querySelector('.popup__features').classList.add('hidden');
+        }
+        if ((offer.photos).length > 0) {
+          housingElement.querySelector('.popup__photos').textContent = ' ';
+          const photoList = housingElement.querySelector('.popup__photos');
+          offer.photos.forEach((photo) => {
+            const photoImg = new Image(photoImgWidth, photoImgHeight);
+            photoImg.classList.add('popup__photo');
+            photoImg.src = photo;
+            photoList.append(photoImg);
+          });
+        } else {
+          housingElement.querySelector('.popup__photos').classList.add('hidden');
+        }
+        return housingElement;
+      };
 
-      } else {
-        housingElement.querySelector('.popup__photos').classList.add('hidden');
-      }
+      const marker = L.marker(
+        {
+          lat: declarationsLat,
+          lng: declarationsLng,
+        },
+        {
+          icon: markerIcon,
+        },
+      )
+      marker
+        .addTo(map)
+        .bindPopup(
+          renderingCardElement(arrayHousing),
+        );
 
-      return housingElement;
-    };
-
-    const marker = L.marker(
-      {
-        lat: arrayHousingLat,
-        lng: arrayHousingLng,
-      },
-      {
-        icon: markerIcon,
-      },
-    )
-    marker
-      .addTo(map)
-      .bindPopup(
-        renderingCardElement(arrayHousing),
-      );
-  });
-};
+      // Тип жилья
+      housingType.addEventListener('change', () => {
+        map.removeLayer(marker);
+        if (offer.type === housingType.value) {
+          marker
+            .addTo(map)
+            .bindPopup(
+              renderingCardElement(arrayHousing),
+            );
+        }
+        if (housingType.value === Default.HOUSING_TYPE_VALUE) {
+          marker
+            .addTo(map)
+            .bindPopup(
+              renderingCardElement(arrayHousing),
+            );
+        }
+      });
+    });
+}
 
 export { createMap };
