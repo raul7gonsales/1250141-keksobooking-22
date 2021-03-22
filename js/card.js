@@ -7,8 +7,7 @@ const photoImgHeight = 40;
 const renderingCardElement = (author, offer) => {
   const housingElement = cardTemplate.cloneNode(true);
 
-  const offerType = getHousingType(offer.type);
-  housingElement.querySelector('.popup__type').textContent = offerType;
+  housingElement.querySelector('.popup__type').textContent = getHousingType(offer.type);
 
   // наполняем данными
   if (author.avatar) {

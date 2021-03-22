@@ -3,6 +3,12 @@ import { pageInactiveState, pageActiveState } from './form.js';
 import { renderingCardElement } from './card.js';
 import { filterDeclarations } from './filter.js';
 
+const ICON_SIZE_WIDTH = 52;
+const ICON_SIZE_HEIGHT = 52;
+const ICON_ANCHOR_WIDTH = 26;
+const ICON_ANCHOR_HEIGHT = 52;
+const DECLARATION_COUNT = 10;
+
 pageInactiveState();
 let L = window.L;
 const map = L.map('map-canvas')
@@ -24,14 +30,14 @@ L.tileLayer(
 
 const mainMarkerIcon = L.icon({
   iconUrl: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg',
-  iconSize: [52, 52],
-  iconAnchor: [26, 52],
+  iconSize: [ICON_SIZE_WIDTH, ICON_SIZE_HEIGHT],
+  iconAnchor: [ICON_ANCHOR_WIDTH, ICON_ANCHOR_HEIGHT],
 });
 
 const markerIcon = L.icon({
   iconUrl: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg',
-  iconSize: [52, 52],
-  iconAnchor: [26, 52],
+  iconSize: [ICON_SIZE_WIDTH, ICON_SIZE_HEIGHT],
+  iconAnchor: [ICON_ANCHOR_WIDTH, ICON_ANCHOR_HEIGHT],
 });
 
 const mainMarker = L.marker(
@@ -59,7 +65,7 @@ const markerLayer = L.layerGroup().addTo(map);
 
 const renderMarkers = (declarations) => {
   markerLayer.clearLayers();
-  const filteredData = filterDeclarations(declarations).slice(0, 10);
+  const filteredData = filterDeclarations(declarations).slice(0, DECLARATION_COUNT);
   filteredData.forEach(({ author, offer, location }) => {
     const declarationsLat = location.lat;
     const declarationsLng = location.lng;
@@ -80,5 +86,4 @@ const renderMarkers = (declarations) => {
       );
   })
 }
-
 export { renderMarkers };

@@ -80,7 +80,7 @@ const capacityRemoveDisabled = (start, end) => {
   }
 }
 
-if (numberRooms.value == numberRoomsTenants.rooms[0]) {
+if (numberRooms.value === numberRoomsTenants.rooms[0]) {
   capacityDisabled();
   capacity[2].selected = true;
   capacity[2].removeAttribute('disabled');
@@ -93,19 +93,19 @@ numberRooms.addEventListener('change', () => {
       capacity[i].selected = true;
     }
   }
-  if (numberRooms.value == numberRoomsTenants.rooms[0]) {
+  if (numberRooms.value === numberRoomsTenants.rooms[0]) {
     capacityDisabled();
     capacityRemoveDisabled(numberRoomsTenants.tenants[1], numberRoomsTenants.tenants[1]);
   }
-  if (numberRooms.value == numberRoomsTenants.rooms[1]) {
+  if (numberRooms.value === numberRoomsTenants.rooms[1]) {
     capacityDisabled();
     capacityRemoveDisabled(numberRoomsTenants.tenants[2], numberRoomsTenants.tenants[1]);
   }
-  if (numberRooms.value == numberRoomsTenants.rooms[2]) {
+  if (numberRooms.value === numberRoomsTenants.rooms[2]) {
     capacityDisabled();
     capacityRemoveDisabled(numberRoomsTenants.tenants[3], numberRoomsTenants.tenants[1]);
   }
-  if (numberRooms.value == numberRoomsTenants.rooms[3]) {
+  if (numberRooms.value === numberRoomsTenants.rooms[3]) {
     capacityDisabled();
     capacity[3].selected = true;
     capacityRemoveDisabled(numberRoomsTenants.tenants[0], numberRoomsTenants.tenants[0]);
