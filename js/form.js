@@ -80,7 +80,7 @@ const capacityRemoveDisabled = (start, end) => {
   }
 }
 
-if (numberRooms.value == numberRoomsTenants.rooms[0]) {
+if (numberRooms.value === numberRoomsTenants.rooms[0]) {
   capacityDisabled();
   capacity[2].selected = true;
   capacity[2].removeAttribute('disabled');
@@ -93,19 +93,19 @@ numberRooms.addEventListener('change', () => {
       capacity[i].selected = true;
     }
   }
-  if (numberRooms.value == numberRoomsTenants.rooms[0]) {
+  if (numberRooms.value === numberRoomsTenants.rooms[0]) {
     capacityDisabled();
     capacityRemoveDisabled(numberRoomsTenants.tenants[1], numberRoomsTenants.tenants[1]);
   }
-  if (numberRooms.value == numberRoomsTenants.rooms[1]) {
+  if (numberRooms.value === numberRoomsTenants.rooms[1]) {
     capacityDisabled();
     capacityRemoveDisabled(numberRoomsTenants.tenants[2], numberRoomsTenants.tenants[1]);
   }
-  if (numberRooms.value == numberRoomsTenants.rooms[2]) {
+  if (numberRooms.value === numberRoomsTenants.rooms[2]) {
     capacityDisabled();
     capacityRemoveDisabled(numberRoomsTenants.tenants[3], numberRoomsTenants.tenants[1]);
   }
-  if (numberRooms.value == numberRoomsTenants.rooms[3]) {
+  if (numberRooms.value === numberRoomsTenants.rooms[3]) {
     capacityDisabled();
     capacity[3].selected = true;
     capacityRemoveDisabled(numberRoomsTenants.tenants[0], numberRoomsTenants.tenants[0]);
@@ -179,4 +179,56 @@ const setUserFormSubmit = (onSuccess) => {
   });
 };
 
-export { pageInactiveState, pageActiveState, setUserFormSubmit, onFormSuccess };
+//// Добавление файлов
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+
+const avatarUser = document.querySelector('.ad-form__field input[type=file]');
+const avatarUserPreview = document.querySelector('.ad-form-header__preview img');
+
+const housingImg = document.querySelector('.ad-form__upload input[type=file]');
+const housingImgPreviewList = document.querySelector('.ad-form__photo-list');
+
+const addFile = () => {
+  avatarUser.addEventListener('change', () => {
+    const file = avatarUser.files[0];
+    const fileName = file.name.toLowerCase();
+
+    const matches = FILE_TYPES.some((it) => {
+      return fileName.endsWith(it);
+    });
+
+    if (matches) {
+      const reader = new FileReader();
+
+      reader.addEventListener('load', () => {
+        avatarUserPreview.src = reader.result;
+      });
+
+      reader.readAsDataURL(file);
+    }
+  });
+
+  housingImg.addEventListener('change', () => {
+    const file = housingImg.files[0];
+    const fileName = file.name.toLowerCase();
+
+    const matches = FILE_TYPES.some((it) => {
+      return fileName.endsWith(it);
+    });
+
+    if (matches) {
+      const reader = new FileReader();
+
+      reader.addEventListener('load', () => {
+        const housingImgPreview = new Image(70, 70);
+        housingImgPreview.src = reader.result;
+        housingImgPreview.classList.add('ad-form__photo')
+        housingImgPreviewList.append(housingImgPreview);
+      });
+
+      reader.readAsDataURL(file);
+    }
+  });
+}
+
+export { pageInactiveState, pageActiveState, setUserFormSubmit, onFormSuccess, addFile };
