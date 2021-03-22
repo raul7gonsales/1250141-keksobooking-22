@@ -4,6 +4,8 @@ import { sendData } from './serverapi.js';
 
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
+const HOUSING_IMG_WIDTH = 70;
+const HOUSING_IMG_HEIGHT = 70;
 
 let numberRoomsTenants = {
   rooms: [1, 2, 3, 100],
@@ -220,7 +222,7 @@ const addFile = () => {
       const reader = new FileReader();
 
       reader.addEventListener('load', () => {
-        const housingImgPreview = new Image(70, 70);
+        const housingImgPreview = new Image(HOUSING_IMG_WIDTH, HOUSING_IMG_HEIGHT);
         housingImgPreview.src = reader.result;
         housingImgPreview.classList.add('ad-form__photo')
         housingImgPreviewList.append(housingImgPreview);

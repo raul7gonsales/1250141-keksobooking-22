@@ -1,6 +1,6 @@
 import { isEscEvent } from './util.js';
 
-const succesModalTemplate = document.querySelector('#success').content.querySelector('.success');
+const successModalTemplate = document.querySelector('#success').content.querySelector('.success');
 const errorModalTemplate = document.querySelector('#error').content.querySelector('.error');
 const errorModalOpenBtn = errorModalTemplate.querySelector('.error__button');
 
@@ -27,7 +27,7 @@ const errorModal = () => {
 };
 
 const successModal = () => {
-  document.querySelector('main').appendChild(succesModalTemplate);
+  document.querySelector('main').appendChild(successModalTemplate);
   const onPopupEscKeydown = (evt) => {
     if (isEscEvent(evt)) {
       evt.preventDefault();
@@ -39,7 +39,7 @@ const successModal = () => {
     closeSuccessModal();
   });
   const closeSuccessModal = () => {
-    succesModalTemplate.remove();
+    successModalTemplate.remove();
     document.removeEventListener('keydown', onPopupEscKeydown);
   };
 }

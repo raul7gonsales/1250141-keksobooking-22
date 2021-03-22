@@ -1,3 +1,5 @@
+const OFFER_PRICE_MIN = 10000;
+const OFFER_PRICE_MAX = 50000;
 const mapFilterForm = document.querySelector('.map__filters');
 const housingType = mapFilterForm.querySelector('#housing-type');
 const housingPrice = mapFilterForm.querySelector('#housing-price');
@@ -6,8 +8,6 @@ const housingGuests = mapFilterForm.querySelector('#housing-guests');
 const Default = {
   DEFAULT_VALUE: 'any',
 };
-const OFFER_PRICE_MIN = 10000;
-const OFFER_PRICE_MAX = 50000;
 
 const filterByType = (ad) => {
   return housingType.value === Default.DEFAULT_VALUE || ad.offer.type === housingType.value
